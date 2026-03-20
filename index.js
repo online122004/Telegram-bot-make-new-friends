@@ -273,5 +273,14 @@ bot.on('message', async (msg) => {
         bot.sendMessage(msg.chat.id, "You are not in a chat! Type /find to find a partner.");
     }
 });
+// Dummy web server to satisfy Render's port binding requirement
+const http = require('http');
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Bot is running and health check passed!');
+}).listen(port, () => {
+    console.log(`Dummy server listening on port ${port} for Render health checks.`);
+});
 
 console.log('Bot is starting...');
